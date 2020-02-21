@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <button type="button" id="butDirectory">Button</button>
+    <script type="text/javascript">
+      const butDir = document.getElementById('butDirectory');
+      butDir.addEventListener('click', async (e) => {
+        const opts = {type: 'openDirectory'};
+        const handle = await window.chooseFileSystemEntries(opts);
+        const entries = await handle.getEntries();
+        for await (const entry of entries) {
+          const kind = entry.isFile ? 'File' : 'Directory';
+          console.log(kind, entry.name);
+        }
+      });
+    </script>
+  </body>
+</html>
